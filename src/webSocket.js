@@ -16,7 +16,7 @@ app.get("/start-stream/:channel", (req, res) => {
 	}
 
 	stream = new Stream({
-		streamUrl: `rtsp://admin:Tendus2021@192.168.15.21:554/cam/realmonitor?channel=${channel}&subtype=0&unicast=true`,
+		streamUrl: `rtsp://admin:Tendus2021@192.168.15.31:554/cam/realmonitor?channel=${channel}&subtype=0&unicast=true`,
 		wsPort: 9999,
 		ffmpegOptions: {
 			"-stats": "",
