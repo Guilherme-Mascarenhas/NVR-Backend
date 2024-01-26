@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 26/01/2024 às 15:59
+-- Tempo de geração: 26/01/2024 às 18:32
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `id_` varchar(50) NOT NULL,
-  `nome` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -39,7 +39,7 @@ CREATE TABLE `users` (
 -- Despejando dados para a tabela `users`
 --
 
-INSERT INTO `users` (`id`, `id_`, `nome`, `email`, `password`) VALUES
+INSERT INTO `users` (`id`, `id_`, `name`, `email`, `password`) VALUES
 (1, '12', 'guilhermer', 'guilherme@g.com', '123'),
 (7, 'daa0b4f3-8529-4176-b173-947d4692f556', '', 'teste@g.com', '$2a$10$TC79pOYnOK.voZE/V57Jw.pSoL77WdgdLKezDKxyvBk'),
 (8, 'f1f5af1c-0af9-4919-bf38-8440f1c5bdc9', '', 'Wol@gmail.com', '$2a$10$EZcTS5DWhdNBWSsr5LEbcOHdl5gHZZ9zuHDbYomuQqv'),
