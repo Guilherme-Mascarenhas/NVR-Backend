@@ -38,8 +38,6 @@ router.post("/auth", async (req, res) => {
 
 		if (AuthUser.length > 0) {
 			const DBpassword = AuthUser[0].password;
-			console.log(DBpassword);
-			console.log(password);
 			const passwordValid = await bcryptjs.compare(password, DBpassword);
 			if (passwordValid) {
 				return res.json({

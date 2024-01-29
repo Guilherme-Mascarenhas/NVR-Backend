@@ -56,7 +56,7 @@ router.post("/new", async (req, res) => {
 		const hash = await bcryptjs.hash(password, 10);
 
 		db.query(
-			"INSERT INTO users (id_, name, email, password) VALUES (?,?,?)",
+			"INSERT INTO users (id_, name, email, password) VALUES (?,?,?,?)",
 			[uuid.v4(), name, email, hash],
 			(err, results, fields) => {
 				if (err) {
