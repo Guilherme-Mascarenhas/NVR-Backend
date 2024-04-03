@@ -36,19 +36,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `users`
---
-
-INSERT INTO `users` (`id`, `id_`, `nome`, `email`, `password`) VALUES
-(1, '12', 'guilhermer', 'guilherme@g.com', '123'),
-(7, 'daa0b4f3-8529-4176-b173-947d4692f556', '', 'teste@g.com', '$2a$10$TC79pOYnOK.voZE/V57Jw.pSoL77WdgdLKezDKxyvBk'),
-(8, 'f1f5af1c-0af9-4919-bf38-8440f1c5bdc9', '', 'Wol@gmail.com', '$2a$10$EZcTS5DWhdNBWSsr5LEbcOHdl5gHZZ9zuHDbYomuQqv');
-
---
--- Índices para tabelas despejadas
---
-
---
 -- Índices de tabela `users`
 --
 ALTER TABLE `users`

@@ -14,7 +14,7 @@ server.listen(3010, ()=>{
   console.log("Server WEBSOCKET running");
 
   stream = new Stream({
-    streamUrl: 'rtsp://admin:Tendus2021@192.168.15.10:554/cam/realmonitor?channel=1&subtype=0&unicast=true',
+    streamUrl: 'rtsp://admin:"password"@"IP":"Port"/cam/realmonitor?channel=1&subtype=0&unicast=true',
     wsPort: 9999,
     ffmpegOptions:{
       '-stats':'',
