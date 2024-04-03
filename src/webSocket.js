@@ -1,17 +1,19 @@
 const express = require("express");
 const cors = require("cors");
 const Stream = require("node-rtsp-stream");
-const http = require("http");
+
+let stream;
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-const server = http.createServer(app);
+app.get("/start-stream/:channel", (req, res) => {
+	const { channel } = req.params;
 
-server.listen(3010, ()=>{
-
-  console.log("Server WEBSOCKET running");
+	if (stream) {
+		stream.stop();
+	}
 
   stream = new Stream({
     streamUrl: 'rtsp://admin:"password"@"IP":"Port"/cam/realmonitor?channel=1&subtype=0&unicast=true',

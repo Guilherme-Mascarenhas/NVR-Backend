@@ -8,79 +8,78 @@ const uuid = require("uuid");
 const db = require("../database");
 const router = express.Router();
 
-router.post("/new", async (req, res)=>{
+router.post("/new", async (req, res) => {
+	const { email, password, name } = req.body;
 
-    const {email, password} = req.body;
+	if (!email || !password || !name) {
+		return res.json({
+			error: true,
+			massage: "Please fill in all fields",
+		});
+	}
 
-    if(!email || !password){
-        return res.json({
-            error:true,
-            massage: "Please fill in all fields"
-        });
-    }
+	if (password.length < 5) {
+		return res.json({
+			error: true,
+			massage: "Password must be longer than 5 char",
+		});
+	}
 
-    if(password.length < 5){
+	if (!validator.isEmail(email)) {
+		return res.json({
+			error: true,
+			massage: "Email format not accepted",
+		});
+	}
+	try {
+		const checkEmail = await new Promise((resolve, reject) => {
+			db.query(
+				"SELECT * FROM users WHERE email = ?",
+				[email],
+				(err, results) => {
+					if (err) {
+						return reject(err);
+					} else {
+						return resolve(results);
+					}
+				}
+			);
+		});
 
-        return res.json({
-            error:true,
-            massage: "Password must be longer than 5 char"
-        });
-    }
+		if (checkEmail.length > 0) {
+			return res.json({
+				error: true,
+				message: "Email already registered!",
+			});
+		}
 
-    if(!validator.isEmail(email)){
-        return res.json({
-            error:true,
-            massage: "Email format not accepted"
-        });
-    }
-    try{
-        const checkEmail = await new Promise((resolve,reject)=>{
+		const hash = await bcryptjs.hash(password, 10);
 
-            db.query("SELECT * FROM users WHERE email = ?", [email], (err, results) => {
-
-                if(err){
-                    return reject(err);
-
-                }else{
-                    return (resolve(results));
-                }
-            });
-        });
-
-        if (checkEmail.length > 0) {
-            return res.json({
-                error: true,
-                message: "Email already registered!",
-            });
-        }
-    
-        const hash = await bcryptjs.hash(password, 10);
-    
-        db.query("INSERT INTO users (id_, email, password) VALUES (?,?,?)", [uuid.v4(), email, hash], (err, results, fields) => {
-            if (err) {
-                console.error('Error: ', err);
-                return res.json({
-                    error: true,
-                    message: "Error Database",
-                });
-
-            } else {
-                return res.json({
-                    error: false,
-                    message: "Registered with success!",
-                });
-            }
-        });
-    
-    } catch (error) {
-        console.error(error);
-        return res.json({
-            error: true,
-            message: "An error occurred while processing your request",
-        });
-    }
-    
+		db.query(
+			"INSERT INTO users (id_, name, email, password) VALUES (?,?,?,?)",
+			[uuid.v4(), name, email, hash],
+			(err, results, fields) => {
+				if (err) {
+					console.error("Error: ", err);
+					return res.json({
+						error: true,
+						message: "Error Database",
+					});
+				} else {
+					return res.json({
+						error: false,
+						message: "Registered with success!",
+					});
+				}
+			}
+		);
+	} catch (error) {
+		console.error(error);
+		return res.json({
+			error: true,
+			message: "An error occurred while processing your request",
+		});
+	}
 });
-
 
 module.exports = router;
