@@ -2,7 +2,7 @@ const express = require("express");
 const mysql = require("mysql");
 const validator = require("validator");
 const bcryptjs = require("bcryptjs");
-const db = require("../database");
+const database = require("../database");
 const router = express.Router();
 
 router.post("/auth", async (req, res) => {
@@ -23,7 +23,7 @@ router.post("/auth", async (req, res) => {
 	}
 	try {
 		const AuthUser = await new Promise((resolve, reject) => {
-			db.query(
+			database.query(
 				"SELECT * FROM users WHERE email = ?",
 				[email],
 				(err, results) => {

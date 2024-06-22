@@ -5,7 +5,7 @@ const mysql = require("mysql");
 const validator = require("validator");
 const bcryptjs = require("bcryptjs");
 const uuid = require("uuid");
-const db = require("../database");
+const database = require("../database");
 const router = express.Router();
 
 router.post("/new", async (req, res) => {
@@ -33,7 +33,7 @@ router.post("/new", async (req, res) => {
 	}
 	try {
 		const checkEmail = await new Promise((resolve, reject) => {
-			db.query(
+			database.query(
 				"SELECT * FROM users WHERE email = ?",
 				[email],
 				(err, results) => {
@@ -55,7 +55,7 @@ router.post("/new", async (req, res) => {
 
 		const hash = await bcryptjs.hash(password, 10);
 
-		db.query(
+		database.query(
 			"INSERT INTO users (id_, name, email, password) VALUES (?,?,?,?)",
 			[uuid.v4(), name, email, hash],
 			(err, results, fields) => {

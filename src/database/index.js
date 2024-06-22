@@ -1,13 +1,13 @@
 const mysql = require("mysql");
 
-const db = mysql.createConnection({
+const database = mysql.createConnection({
 	host: "localhost",
 	user: "root",
 	password: "",
 	database: "camera-nvr",
 });
 
-db.connect((err) => {
+database.connect((err) => {
 	if (err) {
 		console.log("Connection error:", err);
 	} else {
@@ -15,4 +15,4 @@ db.connect((err) => {
 	}
 });
 
-module.exports = db;
+module.exports = database;

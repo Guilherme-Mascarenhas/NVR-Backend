@@ -15,7 +15,7 @@ app.get("/start-stream/:channel", (req, res) => {
 		stream.stop();
 	}
   stream = new Stream({
-    streamUrl: 'rtsp://admin:"password"@"IP":"Port"/cam/realmonitor?channel=1&subtype=0&unicast=true',
+    streamUrl: `rtsp://admin:"password"@"IP":"Port"/cam/realmonitor?channel=${channel}&subtype=0&unicast=true`,
     wsPort: 9999,
     ffmpegOptions:{
       '-stats':'',
